@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Roots | Natural & Organic Hair Oil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --forest: #1b4332;
+            --forest-dark: #0f291e;
+            --gold: #c88a1e;
+            --gold-light: #f4e6c8;
+            --cream: #faf7f0;
+            --cream-dark: #f0eadc;
+            --text: #222222;
+            --muted: #5a5a5a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .top-bar {
+            background-color: var(--forest-dark);
+            color: var(--gold-light);
+            text-align: center;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            letter-spacing: 0.4px;
+        }
+
+        header {
+            background-color: var(--cream);
+            border-bottom: 1px solid rgba(27, 67, 50, 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--forest);
+            text-decoration: none;
+        }
+
+        .cart-btn {
+            background-color: var(--forest);
+            color: var(--white);
+            border: none;
+            padding: 9px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-count {
+            background-color: var(--gold);
+            color: var(--white);
+            font-size: 0.78rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        /* Product Section */
+        .product-section {
+            max-width: 1140px;
+            margin: 24px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 44px;
+            align-items: start;
+        }
+
+        /* Swipeable Horizontal Photo Carousel */
+        .showcase-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 16px;
+            border: 1px solid rgba(27, 67, 50, 0.12);
+            box-shadow: 0 12px 30px rgba(27, 67, 50, 0.08);
+        }
+
+        .photo-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 12px;
+            border-radius: 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .photo-slider::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .photo-slider::-webkit-scrollbar-thumb {
+            background: var(--forest);
+            border-radius: 10px;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .slide-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(15, 41, 30, 0.85);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .swipe-hint {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--gold-light);
+            color: var(--forest-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 2.3rem;
+            color: var(--forest);
+            line-height: 1.15;
+            margin-bottom: 6px;
+        }
+
+        .tagline {
+            font-size: 1.05rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .stars {
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .price-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--forest);
+            margin-bottom: 14px;
+        }
+
+        .price-display span {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .description {
+            margin: 14px 0 22px;
+            font-size: 0.95rem;
+        }
+
+        .size-label {
+            font-weight: 700;
+            font-size: 0.92rem;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--forest-dark);
+        }
+
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+
+        .size-card {
+            background: var(--white);
+            border: 2px solid #dcd6c8;
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            user-select: none;
+        }
+
+        .size-card:hover {
+            border-color: var(--forest);
+        }
+
+        .size-card.selected {
+            border-color: var(--forest);
+            background-color: #eef5f0;
+        }
+
+        .size-card .vol {
+            display: block;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--forest-dark);
+        }
+
+        .size-card .cost {
+            display: block;
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-top: 2px;
+        }
+
+        .best-value {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--forest);
+            color: var(--white);
+            font-size: 0.62rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .qty-box button {
+            background: none;
+            border: none;
+            padding: 12px 15px;
+            font-size: 1.15rem;
+            cursor: pointer;
+            color: var(--forest);
+            font-weight: 700;
+        }
+
+        .qty-box span {
+            padding: 0 10px;
+            font-weight: 700;
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            background-color: var(--forest);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 14px 18px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            border-top: 1px solid #e0d9c8;
+            padding-top: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--forest);
+        }
+
+        /* Ingredients & Usage */
+        .section-container {
+            max-width: 1140px;
+            margin: 64px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 36px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--forest);
+            margin-bottom: 8px;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+        }
+
+        .ingredient-card {
+            background: var(--white);
+            padding: 22px 18px;
+            border-radius: 14px;
+            text-align: center;
+            border: 1px solid rgba(27, 67, 50, 0.08);
+        }
+
+        .ingredient-card h3 {
+            color: var(--forest);
+            margin: 8px 0 6px;
+            font-size: 1.2rem;
+        }
+
+        .ingredient-card p {
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .usage-banner {
+            background-color: var(--forest);
+            color: var(--cream);
+            border-radius: 18px;
+            padding: 36px 24px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+
+        .usage-step span {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .usage-step h3 {
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+
+        .usage-step p {
+            font-size: 0.88rem;
+            opacity: 0.92;
+        }
+
+        footer {
+            background-color: var(--forest-dark);
+            color: var(--cream-dark);
+            text-align: center;
+            padding: 32px 20px;
+            margin-top: 64px;
+            font-size: 0.85rem;
+        }
+
+        /* Cart & Checkout Drawer */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            display: none;
+            z-index: 200;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: var(--cream);
+            z-index: 201;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 18px 20px;
+            background: var(--forest);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        .cart-body {
+            flex: 1;
+            padding: 18px 20px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e5dfd2;
+        }
+
+        .cart-item h4 {
+            color: var(--forest);
+            font-size: 0.95rem;
+        }
+
+        .cart-item p {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #b91c1c;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .checkout-form {
+            margin-top: 18px;
+            background: var(--white);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #e5dfd2;
+        }
+
+        .checkout-form h4 {
+            color: var(--forest);
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .checkout-form input, .checkout-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .cart-footer {
+            padding: 16px 20px;
+            background: var(--white);
+            border-top: 1px solid #e5dfd2;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--forest-dark);
+            margin-bottom: 12px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--forest);
+            color: var(--white);
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background: #1ea952;
+            color: var(--white);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 820px) {
+            .product-section {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .usage-banner {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        🌿 100% Handcrafted Ayurvedic Formula • Free Delivery on Orders Above ₹499
+    </div>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo brand-font">🌱 PURE ROOTS</a>
+            <button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart <span class="cart-count" id="cart-count">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="product-section">
+        <!-- Horizontal Swipe / Scroll Photo Slider -->
+        <div class="showcase-card">
+            <div class="photo-slider">
+                <div class="slide">
+                    <img src="front.png" alt="Front Label View">
+                    <span class="slide-badge">1 / 2 • Front View</span>
+                </div>
+                <div class="slide">
+                    <img src="back.png" alt="Back Label View">
+                    <span class="slide-badge">2 / 2 • Back View</span>
+                </div>
+            </div>
+            <p class="swipe-hint">👈 Swipe left or right to scroll photos 👉</p>
+        </div>
+
+        <!-- Product Details, Prices, and Sizes -->
+        <div class="product-info">
+            <span class="badge">Natural & Organic Ingredients</span>
+            <h1 class="product-title">Pure Roots Hair Oil</h1>
+            <p class="tagline">For Nourished, Lustrous, Strong Hair</p>
+
+            <div class="rating">
+                <span class="stars">★★★★★</span>
+                <span>4.9 (340+ Verified Reviews)</span>
+            </div>
+
+            <div class="price-display" id="display-price">
+                ₹99 <span>only (Inclusive of all taxes)</span>
+            </div>
+
+            <p class="description">
+                Infused with real herbs and slow-cured botanical extracts, <strong>Pure Roots Hair Oil</strong> penetrates deep into the scalp to awaken dormant follicles, reduce hair fall, and restore natural shine.
+            </p>
+
+            <span class="size-label">Select Bottle Size:</span>
+            <div class="size-options">
+                <div class="size-card selected" onclick="selectSize('100ml', 99, this)">
+                    <span class="vol">100 ml</span>
+                    <span class="cost">₹99 only</span>
+                </div>
+                <div class="size-card" onclick="selectSize('200ml', 179, this)">
+                    <span class="vol">200 ml</span>
+                    <span class="cost">₹179 only</span>
+                </div>
+                <div class="size-card" onclick="selectSize('500ml', 349, this)">
+                    <span class="best-value">Best Value</span>
+                    <span class="vol">500 ml</span>
+                    <span class="cost">₹349 only</span>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <div class="qty-box">
+                    <button onclick="updateQty(-1)">−</button>
+                    <span id="qty-value">1</span>
+                    <button onclick="updateQty(1)">+</button>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart()">
+                    Add to Cart — ₹<span id="btn-total">99</span>
+                </button>
+            </div>
+
+            <div class="trust-grid">
+                <div>🌿 100% Handcrafted</div>
+                <div>🚫 Sulfate & Paraben Free</div>
+                <div>🐰 Cruelty-Free</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Ingredients Section -->
+    <section class="section-container">
+        <div class="section-header">
+            <h2>Five Potent Ayurvedic Roots & Oils</h2>
+            <p>Slow-infused botanicals for stronger roots and thicker, lustrous hair.</p>
+        </div>
+
+        <div class="ingredients-grid">
+            <div class="ingredient-card">
+                <div style="font-size:1.8rem">🍏</div>
+                <h3>Amla</h3>
+                <p>Rich in Vitamin C and antioxidants to strengthen hair follicles and prevent premature greying.</p>
+            </div>
+            <div class="ingredient-card">
+                <div style="font-size:1.8rem">🥥</div>
+                <h3>Coconut</h3>
+                <p>Cold-pressed hydration that locks in moisture, prevents protein loss, and tames frizz.</p>
+            </div>
+            <div class="ingredient-card">
+                <div style="font-size:1.8rem">🌰</div>
+                <h3>Almond</h3>
+                <p>Packed with Vitamin E and magnesium to add silky luster and nourish dry strands.</p>
+            </div>
+            <div class="ingredient-card">
+                <div style="font-size:1.8rem">🌿</div>
+                <h3>Bhringraj</h3>
+                <p>Stimulates scalp blood circulation, revitalizes dormant roots, and boosts hair density.</p>
+            </div>
+            <div class="ingredient-card">
+                <div style="font-size:1.8rem">🍃</div>
+                <h3>Brahmi</h3>
+                <p>Soothes dry scalp, reduces flakiness, and fortifies roots against breakage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Guide -->
+    <section class="section-container">
+        <div class="usage-banner">
+            <div class="usage-step">
+                <span>1</span>
+                <h3>Part & Apply</h3>
+                <p>Pour a small amount onto your palms and apply directly along your scalp parting.</p>
+            </div>
+            <div class="usage-step">
+                <span>2</span>
+                <h3>Massage Gently</h3>
+                <p>Massage into the scalp for 5–10 minutes using fingertips to boost root absorption.</p>
+            </div>
+            <div class="usage-step">
+                <span>3</span>
+                <h3>Leave & Rinse</h3>
+                <p>Leave on for 2+ hours or overnight. Wash off with a mild cleanser 2–3 times a week.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="brand-font" style="font-size: 1.25rem; color: #f4e6c8; margin-bottom: 6px;">PURE ROOTS CO.</p>
+        <p>© 2026 Pure Roots Hair Oil. Handcrafted with Natural & Organic Ingredients.</p>
+    </footer>
+
+    <!-- Slide-out Cart & Checkout Drawer -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+
+        <div class="cart-body">
+            <div id="cart-items">
+                <p style="text-align: center; color: #777; margin-top: 30px;">Your cart is empty.</p>
+            </div>
+
+            <div class="checkout-form" id="checkout-form" style="display:none;">
+                <h4>Delivery Details</h4>
+                <input type="text" id="cust-name" placeholder="Full Name">
+                <input type="tel" id="cust-phone" placeholder="Mobile Number">
+                <textarea id="cust-address" rows="2" placeholder="Complete Delivery Address & Pincode"></textarea>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total Amount</span>
+                <span>₹<span id="cart-subtotal">0</span></span>
+            </div>
+            <button class="checkout-btn" onclick="placeOrder()">Place Order (Cash on Delivery)</button>
+            <button class="whatsapp-btn" onclick="orderOnWhatsApp()">💬 Order via WhatsApp</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedSize = '100ml';
+        let selectedPrice = 99;
+        let quantity = 1;
+        let cart = [];
+
+        function selectSize(size, price, cardEl) {
+            selectedSize = size;
+            selectedPrice = price;
+            document.querySelectorAll('.size-card').forEach(c => c.classList.remove('selected'));
+            cardEl.classList.add('selected');
+            updatePriceDisplay();
+        }
+
+        function updateQty(change) {
+            if (quantity + change >= 1) {
+                quantity += change;
+                document.getElementById('qty-value').innerText = quantity;
+                updatePriceDisplay();
+            }
+        }
+
+        function updatePriceDisplay() {
+            document.getElementById('display-price').innerHTML = `₹${selectedPrice} <span>only (Inclusive of all taxes)</span>`;
+            document.getElementById('btn-total').innerText = selectedPrice * quantity;
+        }
+
+        function addToCart() {
+            const existingIndex = cart.findIndex(item => item.size === selectedSize);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += quantity;
+            } else {
+                cart.push({
+                    name: 'Pure Roots Hair Oil',
+                    size: selectedSize,
+                    price: selectedPrice,
+                    qty: quantity
+                });
+            }
+            quantity = 1;
+            document.getElementById('qty-value').innerText = 1;
+            updatePriceDisplay();
+            renderCart();
+            toggleCart(true);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-items');
+            const countBadge = document.getElementById('cart-count');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const formEl = document.getElementById('checkout-form');
+
+            let totalQty = 0;
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p style="text-align: center; color: #777; margin-top: 30px;">Your cart is empty.</p>';
+                countBadge.innerText = '0';
+                subtotalEl.innerText = '0';
+                formEl.style.display = 'none';
+                return;
+            }
+
+            formEl.style.display = 'block';
+            cartContainer.innerHTML = '';
+            cart.forEach((item, index) => {
+                totalQty += item.qty;
+                subtotal += item.price * item.qty;
+
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <h4>${item.name} (${item.size})</h4>
+                            <p>₹${item.price} × ${item.qty} = <strong>₹${item.price * item.qty}</strong></p>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+
+            countBadge.innerText = totalQty;
+            subtotalEl.innerText = subtotal;
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-overlay');
+            if (forceOpen || !drawer.classList.contains('open')) {
+                drawer.classList.add('open');
+                overlay.style.display = 'block';
+            } else {
+                drawer.classList.remove('open');
+                overlay.style.display = 'none';
+            }
+        }
+
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Please add Pure Roots Hair Oil to your cart first!');
+                return;
+            }
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const address = document.getElementById('cust-address').value.trim();
+
+            if (!name || !phone || !address) {
+                alert('Please fill in your Name, Mobile Number, and Delivery Address.');
+                return;
+            }
+
+            const total = document.getElementById('cart-subtotal').innerText;
+            alert(`Order Confirmed!\n\nThank you, ${name}!\nYour Pure Roots Hair Oil order (₹${total}) will be delivered to:\n${address}`);
+            cart = [];
+            renderCart();
+            toggleCart();
+        }
+
+        function orderOnWhatsApp() {
+            if (cart.length === 0) {
+                alert('Please add Pure Roots Hair Oil to your cart first!');
+                return;
+            }
+            const name = document.getElementById('cust-name').value.trim() || 'Customer';
+            const address = document.getElementById('cust-address').value.trim() || 'Not provided';
+            const total = document.getElementById('cart-subtotal').innerText;
+
+            let itemsList = cart.map(i => `• ${i.name} (${i.size}) x${i.qty} = ₹${i.price * i.qty}`).join('%0A');
+            let message = `Hello Pure Roots! I would like to place an order:%0A%0A${itemsList}%0A%0A*Total: ₹${total}*%0A*Name:* ${name}%0A*Address:* ${address}`;
+            
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
